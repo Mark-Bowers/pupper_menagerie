@@ -308,7 +308,7 @@
     </body>
     <!-- Environment -->
     <geom name="floor" size="0 0 .05" type="plane" material="grid" />
-    <geom name="floor_visual" size="0 0 .05" pos="0 0 -0.001" type="plane" material="grid" contype="0" conaffinity="0" group="1" />
+    <geom name="floor_visual" size="0 0 .05" pos="0 0 -0.001" type="plane" material="grid" contype="0" conaffinity="0" />
     <light name="spotlight" mode="targetbodycom" target="base_link" diffuse="0.9 0.9 0.9" specular="0.3 0.3 0.3" pos="0 -4 4" cutoff="100" castshadow="false" />
     <camera name="tracking_cam" mode="targetbody" target="base_link" pos="0.5 -0.5 0.5" />
   </worldbody>
