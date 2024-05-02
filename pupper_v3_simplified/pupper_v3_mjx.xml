@@ -1,0 +1,314 @@
+<mujoco model="pupper_v3">
+  <keyframe>
+    <key name="home"
+      qpos="0 0 0.28             1 0 0 0             0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0"
+      ctrl="0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0" />
+  </keyframe>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="512" height="512" />
+    <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".2 .4 .6" rgb2=".4 .6 .8" />
+    <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance="0" />
+  </asset>
+  <sensor>
+    <framequat name="body_quat" objtype="site" objname="body_imu_site" />
+    <gyro name="body_gyro" site="body_imu_site" />
+    <accelerometer name="body_acc" site="body_imu_site" />
+
+    <framequat    objtype="site" objname="body_imu_site" name="orientation" />
+    <framepos     objtype="site" objname="body_imu_site" name="global_position" />
+    <framelinvel  objtype="site" objname="body_imu_site" name="global_linvel" />
+    <frameangvel  objtype="site" objname="body_imu_site" name="global_angvel" />
+  </sensor>
+  <actuator>
+    <general joint="leg_front_r_1" name="leg_front_r_1" />
+    <general joint="leg_front_r_2" name="leg_front_r_2" />
+    <general joint="leg_front_r_3" name="leg_front_r_3" />
+
+    <general joint="leg_front_l_1" name="leg_front_l_1" />
+    <general joint="leg_front_l_2" name="leg_front_l_2" />
+    <general joint="leg_front_l_3" name="leg_front_l_3" />
+
+    <general joint="leg_back_r_1" name="leg_back_r_1" />
+    <general joint="leg_back_r_2" name="leg_back_r_2" />
+    <general joint="leg_back_r_3" name="leg_back_r_3" />
+
+    <general joint="leg_back_l_1" name="leg_back_l_1" />
+    <general joint="leg_back_l_2" name="leg_back_l_2" />
+    <general joint="leg_back_l_3" name="leg_back_l_3" />
+  </actuator>
+  <default>
+    <default class="foot">       <!-- groups 0-2 are visible by default -->
+      <geom group="1" type="sphere" size="0.01995" material="Polyurethane" condim="3" friction="0.7 0.02 0.01" solimp="0.015 1 0.015"/>
+      <default class="r_foot"> <geom pos="0.06231 -0.06216 0.018"/> <site pos="0.06231 -0.06216 0.018"/> </default>
+      <default class="l_foot"> <geom pos="0.06231  0.06216 0.018"/> <site pos="0.06231  0.06216 0.018"/> </default>
+    </default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+      <default class="actuator_visual"> <geom group="1"/> </default>
+    </default>
+    <default class="collision"> <!-- groups 3-5 are not visible by default -->
+      <geom group="3" rgba="0 0 1 .2"/>
+      <default class="body_collision">
+         <geom type="box" size="0.06130 0.07975 0.129700" pos="0 -0.04805 -0.02148"/>         <!-- Bounding box for body including ears -->
+      </default>
+      <default class="actuator_collision">
+        <geom type="sphere" size="0.0215" pos="0.01675 0 0" quat="0.707107 0 0.707107 0"/> <!-- Bounding sphere for actuator -->
+      </default>
+    </default>
+    <default class="r_1"> <joint range="-1.22 2.51"/> </default>
+    <default class="r_2"> <joint range="-0.42 3.14"/> </default>
+    <default class="r_3"> <joint range="-2.79 0.71"/> </default>
+    <default class="l_1"> <joint range="-2.51 1.22"/> </default>
+    <default class="l_2"> <joint range="-3.14 0.42"/> </default>
+    <default class="l_3"> <joint range="-0.71 2.79"/> </default>
+    <geom type="mesh" friction="0.7" solimp="0.015 1 0.015"/>
+    <general forcerange="-3 3" forcelimited="true" biastype="affine" gainprm="1 0 0" biasprm="0 0 0" />
+    <joint armature="0.0016" type="hinge" damping="0.01" limited="true" />
+  </default>
+  <compiler angle="radian" meshdir="assets" autolimits="true" inertiafromgeom="false" />
+  <asset>
+    <material name="ABS_(LightMagenta)"   specular="0.5" shininess="0.5" rgba="1.000000 0.521569 1.000000 1.0"/>
+    <material name="ABS_(DodgerBlue)"     specular="0.5" shininess="0.5" rgba="0.000000 0.588235 1.000000 1.0"/>
+    <material name="Steel_Satin"          specular="0.2" shininess="0.2" rgba="0.627451 0.627451 0.627451 1.0"/>
+    <material name="Nylon_6-6_(White)"    specular="0.9" shininess="0.9" rgba="0.972549 0.968627 0.929412 1.0"/>
+    <material name="Aluminum_(Charcoal)"  specular="0.4" shininess="0.4" rgba="0.286275 0.286275 0.286275 1.0"/>  <!-- Anodized Aluminum (Rough)-->
+    <material name="Aluminum_Satin"       specular="0.6" shininess="0.6" rgba="0.960784 0.960784 0.964706 1.0"/>
+    <material name="Polyurethane"         specular="0.1" shininess="0.1" rgba="0.200000 0.200000 0.200000 1.0"/>
+
+    <mesh file="BodyV4v70.001.stl"/>              <!-- Pupper body including handle and the ears -->
+
+    <mesh file="Abduction_Bracket_V10.stl"/>      <!-- Abduction Servo Mounting Bracket -->
+    <mesh file="AbBracket_Screw_Caps.stl"/>       <!-- M2.5X8 Socket Head Screw Caps Only (No Threads) -->
+    <mesh name="Abduction_Bracket_V10_L"  file="Abduction_Bracket_V10.stl"   scale="1 -1 1"/>  
+    <mesh name="AbBracket_Screw_Caps_L"   file="AbBracket_Screw_Caps.stl"    scale="1 -1 1"/>
+
+    <mesh file="GIM4305_Tab_Connector.stl"/>      <!-- Electronics Interface -->
+    <mesh file="GIM4305_Servo_Motor.stl"/>        <!-- Steadywin GIM4305 24V High Torque BLDC Gear Servo Motor Actuator -->
+    <mesh file="GIM4305_Mounting_Disc.stl"/>      <!-- Connects leg component to servo rotor -->
+
+    <mesh name="Upper_R_Leg_0"    file="Upper_Leg_0.obj"    scale=".01 .01 .01"/>
+    <mesh name="Upper_R_Leg_1"    file="Upper_Leg_1.obj"    scale=".01 .01 .01"/>
+    <mesh name="Lower_R_Leg_V6_1" file="Lower_Leg_V6_1.obj" scale=".01 .01 .01"/>
+    <mesh name="Lower_R_Leg_V6_2" file="Lower_Leg_V6_2.obj" scale=".01 .01 .01"/>
+
+    <mesh name="Upper_L_Leg_0"    file="Upper_Leg_0.obj"    scale=".01 .01  -.01"/>
+    <mesh name="Upper_L_Leg_1"    file="Upper_Leg_1.obj"    scale=".01 .01  -.01"/>
+    <mesh name="Lower_L_Leg_V6_1" file="Lower_Leg_V6_1.obj" scale=".01 -.01  .01"/>
+    <mesh name="Lower_L_Leg_V6_2" file="Lower_Leg_V6_2.obj" scale=".01 -.01  .01"/>
+  </asset>
+
+  <worldbody>
+    <body name="base_link" pos="0 0 0.13">
+      <inertial pos="0.025 0 0.015" quat="0 0.677807 0 0.73524" mass="1.506" diaginertia="0.00854071 0.0085 0.00235929" />
+      <freejoint/>
+      <!-- Fusion model Pupper v3.2-->
+      <frame name="Pupper_Body_V4v70" quat="0.5 -0.5 -0.5 0.5">
+        <geom class="visual" mesh="BodyV4v70.001" material="ABS_(LightMagenta)"/>
+        <geom class="body_collision"/>
+      </frame>
+      <!-- Front right leg -->
+      <body name="leg_front_r_1" pos="0.075 -0.0835 0" quat="0.707107 0.707107 0 0">
+        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
+        <joint class="r_1" name="leg_front_r_1"/>
+        <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
+        <frame pos="0 0 -0.028" quat="0 0 0 1">
+          <geom class="visual" mesh="Abduction_Bracket_V10"   material="ABS_(DodgerBlue)"/>
+          <geom class="visual" mesh="AbBracket_Screw_Caps"    material="Steel_Satin"/>
+          <!-- Fusion model 4305 Custom Steadywin -->
+          <frame pos="0.01675 0 0.028" quat="0 0 0.707107 -0.707107">
+            <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+            <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+            <geom class="actuator_collision"/>
+          </frame>
+        </frame>
+        <body name="leg_front_r_2" pos="0 0 0" quat="0.707107 0 -0.707107 0">
+          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
+          <joint class="r_2" name="leg_front_r_2"/>
+           <!-- Position disc, invert the r_2 parent body rotation to re-align with GIM4305, then rotated 1/6 pi to align screw holes -->
+          <frame pos="0 0 0.01675" quat="0.683012 0.183013 0.683013 -0.183013">
+            <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
+          </frame>
+          <!-- Fusion model Upper Leg For Flanged -->
+          <frame quat="0.707107 0 -0.707107 0" pos="0 -0.04894 0">
+            <geom class="visual" mesh="Upper_R_Leg_0" material="ABS_(DodgerBlue)"/>
+            <geom class="visual" mesh="Upper_R_Leg_1" material="Steel_Satin"/>
+            <!-- Fusion model 4305 Custom Steadywin -->
+            <frame pos="0.067957 0 -0.013" quat="0.684217 -0.178459 -0.684217 -0.172473">
+              <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+              <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+              <geom class="actuator_collision"/>
+            </frame>
+          </frame>
+          <body name="leg_front_r_3" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0">
+            <inertial pos="0.03866 -0.03585 0.01833" quat="0.270598 0.653281 -0.270598 0.653281" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06" />
+            <joint class="r_3" name="leg_front_r_3"/>
+            <frame pos="0 0 0.013" quat="0.587938 0.392847 0.587938 -0.392847">
+              <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
+            </frame>
+            <!-- Fusion model Lower leg - Short Short V6 -->
+            <frame pos="0 0 0.018" quat="0.9239 0 0 -0.3827">
+              <geom class="visual" mesh="Lower_R_Leg_V6_1" material="ABS_(DodgerBlue)"/>
+              <geom class="visual" mesh="Lower_R_Leg_V6_2" material="Steel_Satin"/>
+            </frame>
+            <geom class="r_foot"/>
+            <site class="r_foot" name="leg_front_r_3_foot_site"/>
+          </body>
+        </body>
+      </body>
+      <!-- Front left leg -->
+      <body name="leg_front_l_1" pos="0.075 0.0835 0" quat="0.707107 -0.707107 0 0">
+        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
+        <joint class="l_1" name="leg_front_l_1"/>
+        <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
+        <frame pos="0 0 -0.028" quat="0 0 0 1">
+          <geom class="visual" mesh="Abduction_Bracket_V10_L"   material="ABS_(DodgerBlue)"/>
+          <geom class="visual" mesh="AbBracket_Screw_Caps_L"    material="Steel_Satin"/>
+          <!-- Fusion model 4305 Custom Steadywin -->
+        </frame> 
+        <frame pos="-0.01675 0 0" quat="0.258819 0.965926 0 0"> <!-- Rotate 5/6 pi around X axis to orient tab connector -->
+          <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+          <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+          <geom class="actuator_collision"/>
+        </frame>
+        <body name="leg_front_l_2" pos="0 0 0" quat="0 0.707107 0 -0.707107">
+          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
+          <joint class="l_2" name="leg_front_l_2"/>
+           <!-- Position disc, invert the r_2 parent body rotation to re-align with GIM4305, then rotated -1/6 pi to align screw holes -->
+          <frame pos="0 0 0.01675" quat="0.683013 -0.183013 0.683013 0.183013">
+            <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
+          </frame>
+          <!-- Fusion model Upper Leg For Flanged -->
+          <frame pos="0 -0.04894 0" quat="0.707107 0 -0.707107 0">
+            <geom class="visual" mesh="Upper_L_Leg_0" material="ABS_(DodgerBlue)"/>
+            <geom class="visual" mesh="Upper_L_Leg_1" material="Steel_Satin"/>
+            <!-- Fusion model 4305 Custom Steadywin -->
+          </frame>
+          <frame pos="-0.013 -0.04894 0.0685" quat="0.707107 -0.707107 0 0">
+            <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+            <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+            <geom class="actuator_collision"/>
+          </frame>
+          <body name="leg_front_l_3" pos="0 -0.0494 0.0685" quat="0 -0.707107 0 0.707107">
+            <inertial pos="0.03866 0.03585 0.01833" quat="0.653281 0.270598 -0.653281 0.270598" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06" />
+            <joint class="l_3" name="leg_front_l_3"/>
+            <frame pos="0 0 0.013" quat="0.587938 0.392847 0.587938 -0.392847">
+              <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
+            </frame>
+            <!-- Fusion model Lower leg - Short Short V6 -->
+            <frame pos="0 0 0.018" quat="0.9239 0 0 0.3827">  <!-- 1/8 pi around Z axis -->
+              <geom class="visual" mesh="Lower_L_Leg_V6_1" material="ABS_(DodgerBlue)"/>
+              <geom class="visual" mesh="Lower_L_Leg_V6_2" material="Steel_Satin"/>
+            </frame>
+            <geom class="l_foot"/>
+            <site class="l_foot" name="leg_front_l_3_foot_site"/>
+          </body>
+        </body>
+      </body>
+      <!-- Back right leg -->
+      <body name="leg_back_r_1" pos="-0.075 -0.0725 0" quat="0.707107 0.707107 0 0">
+        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
+        <joint class="r_1" name="leg_back_r_1"/>
+        <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
+        <frame pos="0 0 -0.028" quat="0 0 0 1">
+          <geom class="visual" mesh="Abduction_Bracket_V10"   material="ABS_(DodgerBlue)"/>
+          <geom class="visual" mesh="AbBracket_Screw_Caps"    material="Steel_Satin"/>
+          <!-- Fusion model 4305 Custom Steadywin -->
+          <frame pos="0.01675 0 0.028" quat="0 0 0.707107 -0.707107">
+            <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+            <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+            <geom class="actuator_collision"/>
+          </frame>
+        </frame>
+        <body name="leg_back_r_2" pos="0 0 0" quat="0.707107 0 -0.707107 0">
+          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
+          <joint class="r_2" name="leg_back_r_2"/>
+           <!-- Position disc, invert the r_2 parent body rotation to re-align with GIM4305, then rotated 1/6 pi to align screw holes -->
+          <frame pos="0 0 0.01675" quat="0.683012 0.183013 0.683013 -0.183013">
+            <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
+          </frame>
+          <!-- Fusion model Upper Leg For Flanged -->
+          <frame quat="0.707107 0 -0.707107 0" pos="0 -0.04894 0">
+            <geom class="visual" mesh="Upper_R_Leg_0" material="ABS_(DodgerBlue)"/>
+            <geom class="visual" mesh="Upper_R_Leg_1" material="Steel_Satin"/>
+            <!-- Fusion model 4305 Custom Steadywin -->
+            <frame pos="0.067957 0 -0.013" quat="0.684217 -0.178459 -0.684217 -0.172473">
+              <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+              <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+              <geom class="actuator_collision"/>
+            </frame>
+          </frame>
+          <body name="leg_back_r_3" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0">
+            <inertial pos="0.03866 -0.03585 0.01833" quat="0.270598 0.653281 -0.270598 0.653281" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06" />
+            <joint class="r_3" name="leg_back_r_3"/>
+            <frame pos="0 0 0.013" quat="0.587938 0.392847 0.587938 -0.392847">
+              <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
+            </frame>
+            <!-- Fusion model Lower leg - Short Short V6 -->
+            <frame pos="0 0 0.018" quat="0.9239 0 0 -0.3827">
+              <geom class="visual" mesh="Lower_R_Leg_V6_1" material="ABS_(DodgerBlue)"/>
+              <geom class="visual" mesh="Lower_R_Leg_V6_2" material="Steel_Satin"/>
+            </frame>
+            <geom class="r_foot"/>
+            <site class="r_foot" name="leg_back_r_3_foot_site"/>
+          </body>
+        </body>
+      </body>
+      <!-- Back left leg -->
+      <body name="leg_back_l_1" pos="-0.075 0.0725 0" quat="0.707107 -0.707107 0 0">
+        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
+        <joint class="l_1" name="leg_back_l_1"/>
+        <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
+        <frame pos="0 0 -0.028" quat="0 0 0 1">
+          <geom class="visual" mesh="Abduction_Bracket_V10_L"   material="ABS_(DodgerBlue)"/>
+          <geom class="visual" mesh="AbBracket_Screw_Caps_L"    material="Steel_Satin"/>
+          <!-- Fusion model 4305 Custom Steadywin -->
+        </frame>
+        <frame pos="-0.01675 0 0" quat="0.258819 0.965926 0 0"> <!-- Rotate 5/6 pi around X axis to orient tab connector -->
+          <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+          <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+          <geom class="actuator_collision"/>
+        </frame>
+        <body name="leg_back_l_2" pos="0 0 0" quat="0 0.707107 0 -0.707107">
+          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
+          <joint class="l_2" name="leg_back_l_2"/>
+          <!-- Position disc, invert the r_2 parent body rotation to re-align with GIM4305, then rotated -1/6 pi to align screw holes -->
+          <frame pos="0 0 0.01675" quat="0.683013 -0.183013 0.683013 0.183013">
+            <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
+          </frame>
+          <!-- Fusion model Upper Leg For Flanged -->
+          <frame pos="0 -0.04894 0" quat="0.707107 0 -0.707107 0">
+            <geom class="visual" mesh="Upper_L_Leg_0" material="ABS_(DodgerBlue)"/>
+            <geom class="visual" mesh="Upper_L_Leg_1" material="Steel_Satin"/>
+            <!-- Fusion model 4305 Custom Steadywin -->
+          </frame>
+          <frame pos="-0.013 -0.04894 0.0685" quat="0.707107 -0.707107 0 0">
+            <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+            <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+            <geom class="actuator_collision"/>
+          </frame>
+          <body name="leg_back_l_3" pos="0 -0.0494 0.0685" quat="0 -0.707107 0 0.707107">
+            <inertial pos="0.03866 0.03585 0.01833" quat="0.653281 0.270598 -0.653281 0.270598" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06" />
+            <joint class="l_3" name="leg_back_l_3" />
+            <frame pos="0 0 0.013" quat="0.587938 0.392847 0.587938 -0.392847">
+              <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
+            </frame>
+            <!-- Fusion model Lower leg - Short Short V6 -->
+            <frame pos="0 0 0.018" quat="0.9239 0 0 0.3827">  <!-- 1/8 pi around Z axis -->
+              <geom class="visual" mesh="Lower_L_Leg_V6_1" material="ABS_(DodgerBlue)"/>
+              <geom class="visual" mesh="Lower_L_Leg_V6_2" material="Steel_Satin"/>
+            </frame>
+            <geom class="l_foot"/>
+            <site class="l_foot" name="leg_back_l_3_foot_site"/>
+          </body>
+        </body>
+      </body>
+      <!-- IMU site -->
+      <site name="body_imu_site" pos="0.09 0 0.032" />
+    </body>
+    <!-- Environment -->
+    <geom name="floor" size="0 0 .05" type="plane" material="grid" />
+    <geom name="floor_visual" size="0 0 .05" pos="0 0 -0.001" type="plane" material="grid" contype="0" conaffinity="0" group="1" />
+    <light name="spotlight" mode="targetbodycom" target="base_link" diffuse="0.9 0.9 0.9" specular="0.3 0.3 0.3" pos="0 -4 4" cutoff="100" castshadow="false" />
+    <camera name="tracking_cam" mode="targetbody" target="base_link" pos="0.5 -0.5 0.5" />
+  </worldbody>
+</mujoco>
