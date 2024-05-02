@@ -62,9 +62,10 @@
     <default class="l_2"> <joint range="-3.14 0.42"/> </default>
     <default class="l_3"> <joint range="-0.71 2.79"/> </default>
     <geom type="mesh" friction="0.7" solimp="0.015 1 0.015"/>
-    <general forcerange="-3 3" forcelimited="true" biastype="affine" gainprm="1 0 0" biasprm="0 0 0" />
+    <general forcerange="-3 3" forcelimited="true" biastype="affine" gainprm="5.0 0 0" biasprm="0 -5.0 -0.1" />
     <joint armature="0.0016" type="hinge" damping="0.01" limited="true" />
   </default>
+  <option cone="pyramidal" impratio="100" />
   <compiler angle="radian" meshdir="assets" autolimits="true" inertiafromgeom="false" />
   <asset>
     <material name="ABS_(LightMagenta)"   specular="0.5" shininess="0.5" rgba="1.000000 0.521569 1.000000 1.0"/>
