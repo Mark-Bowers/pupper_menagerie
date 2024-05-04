@@ -28,10 +28,9 @@
 
   <default>
     <general forcerange="-3 3" forcelimited="true" biastype="affine" gainprm="5.0 0 0" biasprm="0 -5.0 -0.1" />
-    <geom contype="0" conaffinity="0"/>
     <joint armature="0.0016" type="hinge" damping="0.01" limited="true" />
     <default class="foot">       <!-- groups 0-2 are visible by default -->
-      <geom group="1" type="sphere" size="0.01995" material="Polyurethane" contype="0" conaffinity="1" solimp="0.015 1 0.031" friction="0.8 0.02 0.01"/>
+      <geom group="1" type="sphere" size="0.01995" material="Polyurethane" contype="0" solimp="0.015 1 0.031" friction="0.8 0.02 0.01"/>
       <default class="r_foot"> <geom size="0.0202" pos="0.06231 -0.06216 0.018"/> <site pos="0.06231 -0.06216 0.018"/> </default>
       <default class="l_foot"> <geom size="0.0202" pos="0.06231  0.06216 0.018"/> <site pos="0.06231  0.06216 0.018"/> </default>
     </default>
@@ -40,7 +39,7 @@
       <default class="actuator_visual"> <geom group="1"/> </default>
     </default>
     <default class="collision"> <!-- groups 3-5 are not visible by default -->
-      <geom group="3" contype="0" conaffinity="1" solimp="0.015 1 0.031" friction="0.8 0.02 0.01" rgba="0 0 1 .2"/>
+      <geom group="3" contype="0" solimp="0.015 1 0.031" friction="0.8 0.02 0.01" rgba="0 0 1 .2"/>
       <default class="body_collision">
          <geom type="box" size="0.06130 0.07975 0.129700" pos="0 -0.04805 -0.02148"/>       <!-- Bounding box for body including ears -->
       </default>
@@ -109,7 +108,7 @@
 
   <worldbody>
     <!-- Environment -->
-    <geom name="floor" type="plane" size="0 0 .05" material="grid" contype="1" conaffinity="1"/>
+    <geom name="floor" type="plane" size="0 0 .05" material="grid"/>
     <geom class="visual" name="floor_visual" size="0 0 .05" pos="0 0 -0.001" type="plane" material="grid" group="1" />
     <light name="spotlight" mode="targetbodycom" target="base_link" diffuse="0.9 0.9 0.9" specular="0.3 0.3 0.3" pos="0 -4 4" cutoff="100" castshadow="false" />
     <camera name="tracking_cam" mode="targetbody" target="base_link" pos="0.5 -0.5 0.5" />
