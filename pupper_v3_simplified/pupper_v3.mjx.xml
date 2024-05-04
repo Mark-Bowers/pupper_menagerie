@@ -86,6 +86,25 @@
     <mesh name="LegAssemblyForFlangedv26.010" file="LegAssemblyForFlangedv26.001.stl" scale="1 -1 1" />
     <mesh name="LegAssemblyForFlangedv26.011" file="LegAssemblyForFlangedv26.002.stl" scale="1 1 -1" />
     <mesh name="LegAssemblyForFlangedv26.012" file="LegAssemblyForFlangedv26.003.stl" scale="1 1 -1" />
+
+    <mesh file="Abduction_Bracket_V10.stl"/>      <!-- Abduction Servo Mounting Bracket -->
+    <mesh file="AbBracket_Screw_Caps.stl"/>       <!-- M2.5X8 Socket Head Screw Caps Only (No Threads) -->
+    <mesh name="Abduction_Bracket_V10_L"  file="Abduction_Bracket_V10.stl"   scale="1 -1 1"/>
+    <mesh name="AbBracket_Screw_Caps_L"   file="AbBracket_Screw_Caps.stl"    scale="1 -1 1"/>
+
+    <mesh file="GIM4305_Tab_Connector.stl"/>      <!-- Electronics Interface -->
+    <mesh file="GIM4305_Servo_Motor.stl"/>        <!-- Steadywin GIM4305 24V High Torque BLDC Gear Servo Motor Actuator -->
+    <mesh file="GIM4305_Mounting_Disc.stl"/>      <!-- Connects leg component to servo rotor -->
+
+    <mesh name="Upper_R_Leg_0"    file="Upper_Leg_0.obj"    scale=".01 .01 .01"/>
+    <mesh name="Upper_R_Leg_1"    file="Upper_Leg_1.obj"    scale=".01 .01 .01"/>
+    <mesh name="Lower_R_Leg_V6_1" file="Lower_Leg_V6_1.obj" scale=".01 .01 .01"/>
+    <mesh name="Lower_R_Leg_V6_2" file="Lower_Leg_V6_2.obj" scale=".01 .01 .01"/>
+
+    <mesh name="Upper_L_Leg_0"    file="Upper_Leg_0.obj"    scale=".01 .01  -.01"/>
+    <mesh name="Upper_L_Leg_1"    file="Upper_Leg_1.obj"    scale=".01 .01  -.01"/>
+    <mesh name="Lower_L_Leg_V6_1" file="Lower_Leg_V6_1.obj" scale=".01 -.01  .01"/>
+    <mesh name="Lower_L_Leg_V6_2" file="Lower_Leg_V6_2.obj" scale=".01 -.01  .01"/>
   </asset>
 
   <worldbody>
@@ -111,10 +130,23 @@
         <geom mesh="Body_V4_Handle"   material="Silicone_(White)" class="visual"/>
       </frame>
 
+      <!-- Front right leg -->
       <body name="leg_front_r_1" pos="0.075 -0.0835 0" quat="0.707107 0.707107 0 0">
         <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
-        <joint name="leg_front_r_1" pos="0 0 0" axis="0 0 1" range="-1.22 2.51" />
-        <geom class="visual" pos="0 0 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.001" />
+        <!-- <joint name="leg_front_r_1" pos="0 0 0" axis="0 0 1" range="-1.22 2.51" /> -->
+        <joint class="r_1" name="leg_front_r_1"/>
+        <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
+        <!-- <geom class="visual" pos="0 0 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.001" /> -->
+        <frame pos="0 0 -0.028" quat="0 0 0 1">
+          <geom class="visual" mesh="Abduction_Bracket_V10"   material="ABS_(DodgerBlue)"/>
+          <geom class="visual" mesh="AbBracket_Screw_Caps"    material="Steel_Satin"/>
+          <!-- Fusion model 4305 Custom Steadywin -->
+          <frame pos="0.01675 0 0.028" quat="0 0 0.707107 -0.707107">
+            <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+            <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+            <!-- <geom class="actuator_collision"/> -->
+          </frame>
+        </frame>
         <body name="leg_front_r_2" pos="0 0 0" quat="0.707107 0 -0.707107 0">
           <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
           <joint name="leg_front_r_2" pos="0 0 0" axis="0 0 1" range="-0.42 3.14" />
@@ -130,10 +162,23 @@
         </body>
       </body>
 
+      <!-- Front left leg -->
       <body name="leg_front_l_1" pos="0.075 0.0835 0" quat="0.707107 -0.707107 0 0">
         <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
-        <joint name="leg_front_l_1" pos="0 0 0" axis="0 0 1" range="-2.51 1.22" />
-        <geom class="visual" pos="0 0 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.010" />
+        <!-- <joint name="leg_front_l_1" pos="0 0 0" axis="0 0 1" range="-2.51 1.22" /> -->
+        <joint class="l_1" name="leg_front_l_1"/>
+        <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
+        <!-- <geom class="visual" pos="0 0 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.010" /> -->
+        <frame pos="0 0 -0.028" quat="0 0 0 1">
+          <geom class="visual" mesh="Abduction_Bracket_V10_L"   material="ABS_(DodgerBlue)"/>
+          <geom class="visual" mesh="AbBracket_Screw_Caps_L"    material="Steel_Satin"/>
+          <!-- Fusion model 4305 Custom Steadywin -->
+        </frame>
+        <frame pos="-0.01675 0 0" quat="0.258819 0.965926 0 0"> <!-- Rotate 5/6 pi around X axis to orient tab connector -->
+          <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+          <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+          <!-- <geom class="actuator_collision"/> -->
+        </frame>
         <body name="leg_front_l_2" pos="0 0 0" quat="0 0.707107 0 -0.707107">
           <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
           <joint name="leg_front_l_2" pos="0 0 0" axis="0 0 1" range="-3.14 0.42" />
@@ -149,10 +194,23 @@
         </body>
       </body>
 
+      <!-- Back right leg -->
       <body name="leg_back_r_1" pos="-0.075 -0.0725 0" quat="0.707107 0.707107 0 0">
         <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
-        <joint name="leg_back_r_1" pos="0 0 0" axis="0 0 1" range="-1.22 2.51" />
-        <geom class="visual" pos="0 0 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.001" />
+        <!-- <joint name="leg_back_r_1" pos="0 0 0" axis="0 0 1" range="-1.22 2.51" /> -->
+        <joint class="r_1" name="leg_back_r_1"/>
+        <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
+        <!-- <geom class="visual" pos="0 0 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.001" /> -->
+        <frame pos="0 0 -0.028" quat="0 0 0 1">
+          <geom class="visual" mesh="Abduction_Bracket_V10"   material="ABS_(DodgerBlue)"/>
+          <geom class="visual" mesh="AbBracket_Screw_Caps"    material="Steel_Satin"/>
+          <!-- Fusion model 4305 Custom Steadywin -->
+          <frame pos="0.01675 0 0.028" quat="0 0 0.707107 -0.707107">
+            <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+            <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+            <!-- <geom class="actuator_collision"/> -->
+          </frame>
+        </frame>
         <body name="leg_back_r_2" pos="0 0 0" quat="0.707107 0 -0.707107 0">
           <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
           <joint name="leg_back_r_2" pos="0 0 0" axis="0 0 1" range="-0.42 3.14" />
@@ -168,10 +226,23 @@
         </body>
       </body>
 
+      <!-- Back left leg -->
       <body name="leg_back_l_1" pos="-0.075 0.0725 0" quat="0.707107 -0.707107 0 0">
         <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
-        <joint name="leg_back_l_1" pos="0 0 0" axis="0 0 1" range="-2.51 1.22" />
-        <geom class="visual" pos="0 0 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.010" />
+        <!-- <joint name="leg_back_l_1" pos="0 0 0" axis="0 0 1" range="-2.51 1.22" /> -->
+        <joint class="l_1" name="leg_back_l_1"/>
+        <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
+        <!-- <geom class="visual" pos="0 0 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.010" /> -->
+        <frame pos="0 0 -0.028" quat="0 0 0 1">
+          <geom class="visual" mesh="Abduction_Bracket_V10_L"   material="ABS_(DodgerBlue)"/>
+          <geom class="visual" mesh="AbBracket_Screw_Caps_L"    material="Steel_Satin"/>
+          <!-- Fusion model 4305 Custom Steadywin -->
+        </frame>
+        <frame pos="-0.01675 0 0" quat="0.258819 0.965926 0 0"> <!-- Rotate 5/6 pi around X axis to orient tab connector -->
+          <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+          <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+          <!-- <geom class="actuator_collision"/> -->
+        </frame>
         <body name="leg_back_l_2" pos="0 0 0" quat="0 0.707107 0 -0.707107">
           <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
           <joint name="leg_back_l_2" pos="0 0 0" axis="0 0 1" range="-3.14 0.42" />
