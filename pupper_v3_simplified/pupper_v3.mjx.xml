@@ -54,21 +54,32 @@
     <default class="l_1"> <joint range="-2.51 1.22"/> </default>
     <default class="l_2"> <joint range="-3.14 0.42"/> </default>
     <default class="l_3"> <joint range="-0.71 2.79"/> </default>
-    <!-- <default class="collision">
-      <geom group="3" contype="0" conaffinity="1" solimp="0.015 1 0.031" friction="0.8 0.02 0.01"/>
-    </default> -->
   </default>
 
   <asset>
-    <material name="ABS_(LightMagenta)"   specular="0.5" shininess="0.5" rgba="1.000000 0.521569 1.000000 1.0"/>
-    <material name="ABS_(DodgerBlue)"     specular="0.5" shininess="0.5" rgba="0.000000 0.588235 1.000000 1.0"/>
-    <material name="Steel_Satin"          specular="0.2" shininess="0.2" rgba="0.627451 0.627451 0.627451 1.0"/>
-    <material name="Nylon_6-6_(White)"    specular="0.9" shininess="0.9" rgba="0.972549 0.968627 0.929412 1.0"/>
-    <material name="Aluminum_(Charcoal)"  specular="0.4" shininess="0.4" rgba="0.286275 0.286275 0.286275 1.0"/>  <!-- Anodized Aluminum (Rough)-->
-    <material name="Aluminum_Satin"       specular="0.6" shininess="0.6" rgba="0.960784 0.960784 0.964706 1.0"/>
-    <material name="Polyurethane"         specular="0.1" shininess="0.1" rgba="0.200000 0.200000 0.200000 1.0"/>
+    <material name="ABS_(LightMagenta)"     specular="0.5" shininess="0.5" rgba="1.000000 0.521569 1.000000 1.0"/>
+    <material name="ABS_(DodgerBlue)"       specular="0.5" shininess="0.5" rgba="0.000000 0.588235 1.000000 1.0"/>
+    <material name="Steel_Satin"            specular="0.2" shininess="0.2" rgba="0.627451 0.627451 0.627451 1.0"/>
+    <material name="Nylon_6-6_(White)"      specular="0.9" shininess="0.9" rgba="0.972549 0.968627 0.929412 1.0"/>
+    <material name="Aluminum_(Charcoal)"    specular="0.4" shininess="0.4" rgba="0.286275 0.286275 0.286275 1.0"/>  <!-- Anodized Aluminum (Rough)-->
+    <material name="Aluminum_Satin"         specular="0.6" shininess="0.6" rgba="0.960784 0.960784 0.964706 1.0"/>
+    <material name="Polyurethane"           specular="0.1" shininess="0.1" rgba="0.200000 0.200000 0.200000 1.0"/>
+    <material name="Silicone_(White)"       specular="0.5" shininess="0.5" rgba="0.964706 0.964706 0.952941 1.0"/>
+    <material name="Plastic_Glossy_(Black)" specular="0.5" shininess="0.5" rgba="0.098039 0.098039 0.098039 1.0"/>
+    <material name="Glass_(Grey)"           specular="0.5" shininess="0.5" rgba="0.701961 0.701961 0.701961 1.0"/>
+    <material name="Plastic_Glossy_(Blue)"  specular="0.5" shininess="0.5" rgba="0.188235 0.231373 0.588235 1.0"/>
+    <material name="Silicone_(QuickSilver)" specular="0.5" shininess="0.5" rgba="0.654902 0.654902 0.654902 1.0"/>
 
     <mesh name="BodyV4v70.001" file="BodyV4v70.001.stl" />
+
+    <mesh file="Body_V4_Strap.obj"    scale=".01 .01 .01"/>
+    <mesh file="Body_V4_Ears.obj"     scale=".01 .01 .01"/>
+    <mesh file="Body_V4_Servos.obj"   scale=".01 .01 .01"/>
+    <mesh file="Body_V4_Glass.obj"    scale=".01 .01 .01"/>
+    <mesh file="Body_V4_Display.obj"  scale=".01 .01 .01"/>
+    <mesh file="Body_V4.obj"          scale=".01 .01 .01"/>
+    <mesh file="Body_V4_Handle.obj"   scale=".01 .01 .01"/>
+
     <mesh name="LegAssemblyForFlangedv26.001" file="LegAssemblyForFlangedv26.001.stl" />
     <mesh name="LegAssemblyForFlangedv26.002" file="LegAssemblyForFlangedv26.002.stl" />
     <mesh name="LegAssemblyForFlangedv26.003" file="LegAssemblyForFlangedv26.003.stl" />
@@ -89,7 +100,16 @@
       <inertial pos="0.025 0 0.015" quat="0 0.677807 0 0.73524" mass="1.506" diaginertia="0.00854071 0.0085 0.00235929" />
       <joint name="world_to_body" type="free" />
       <geom class="collision" size="0.04507 0.06379 0.129715" pos="0.02146 0 0.03345" quat="0.5 -0.5 -0.5 0.5" type="box" />
-      <geom class="visual" quat="0.5 -0.5 -0.5 0.5" mesh="BodyV4v70.001" material="ABS_(LightMagenta)" />
+      <!-- <geom class="visual" quat="0.5 -0.5 -0.5 0.5" mesh="BodyV4v70.001" material="ABS_(LightMagenta)" /> -->
+      <frame quat="0.5 -0.5 -0.5 0.5">
+        <geom mesh="Body_V4_Strap"    material="Silicone_(QuickSilver)" class="visual"/>
+        <geom mesh="Body_V4_Ears"     material="ABS_(DodgerBlue)" class="visual"/>
+        <geom mesh="Body_V4_Servos"   material="Plastic_Glossy_(Blue)" class="visual"/>
+        <geom mesh="Body_V4_Glass"    material="Glass_(Grey)" class="visual"/>
+        <geom mesh="Body_V4_Display"  material="Plastic_Glossy_(Black)" class="visual"/>
+        <geom mesh="Body_V4"          material="ABS_(LightMagenta)" class="visual"/>
+        <geom mesh="Body_V4_Handle"   material="Silicone_(White)" class="visual"/>
+      </frame>
 
       <body name="leg_front_r_1" pos="0.075 -0.0835 0" quat="0.707107 0.707107 0 0">
         <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
