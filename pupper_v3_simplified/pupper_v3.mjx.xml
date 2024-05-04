@@ -229,9 +229,25 @@
         </frame>
         <body name="leg_back_r_2" pos="0 0 0" quat="0.707107 0 -0.707107 0">
           <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
-          <joint name="leg_back_r_2" pos="0 0 0" axis="0 0 1" range="-0.42 3.14" />
+          <!-- <joint name="leg_back_r_2" pos="0 0 0" axis="0 0 1" range="-0.42 3.14" /> -->
+          <joint class="r_2" name="leg_back_r_2"/>
+           <!-- Position disc, invert the r_2 parent body rotation to re-align with GIM4305, then rotated 1/6 pi to align screw holes -->
+          <frame pos="0 0 0.01675" quat="0.683012 0.183013 0.683013 -0.183013">
+            <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
+          </frame>
+          <!-- Fusion model Upper Leg For Flanged -->
           <geom class="collision" size="0.025" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0" type="sphere" />
-          <geom class="visual" pos="-0.028 0 0" quat="0 0.707107 0 0.707107" mesh="LegAssemblyForFlangedv26.002" />
+          <!-- <geom class="visual" pos="-0.028 0 0" quat="0 0.707107 0 0.707107" mesh="LegAssemblyForFlangedv26.002" /> -->
+          <frame quat="0.707107 0 -0.707107 0" pos="0 -0.04894 0">
+            <geom class="visual" mesh="Upper_R_Leg_0" material="ABS_(DodgerBlue)"/>
+            <geom class="visual" mesh="Upper_R_Leg_1" material="Steel_Satin"/>
+            <!-- Fusion model 4305 Custom Steadywin -->
+            <frame pos="0.067957 0 -0.013" quat="0.684217 -0.178459 -0.684217 -0.172473">
+              <geom class="actuator_visual" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
+              <geom class="actuator_visual" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
+              <!-- <geom class="actuator_collision"/> -->
+            </frame>
+          </frame>
           <body name="leg_back_r_3" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0">
             <inertial pos="0.03866 -0.03585 0.01833" quat="0.270598 0.653281 -0.270598 0.653281" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06" />
             <joint name="leg_back_r_3" pos="0 0 0" axis="0 0 1" range="-2.79 0.71" />
