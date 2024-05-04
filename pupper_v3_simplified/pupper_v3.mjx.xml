@@ -28,7 +28,7 @@
 
   <default>
     <general forcerange="-3 3" forcelimited="true" biastype="affine" gainprm="5.0 0 0" biasprm="0 -5.0 -0.1" />
-    <geom condim="3" contype="0" conaffinity="0"/>
+    <geom contype="0" conaffinity="0"/>
     <joint armature="0.0016" type="hinge" damping="0.01" limited="true" />
     <default class="foot">       <!-- groups 0-2 are visible by default -->
       <geom group="1" type="sphere" size="0.01995" material="Polyurethane" contype="0" conaffinity="1" solimp="0.015 1 0.031" friction="0.8 0.02 0.01"/>
@@ -40,7 +40,7 @@
       <default class="actuator_visual"> <geom group="1"/> </default>
     </default>
     <default class="collision"> <!-- groups 3-5 are not visible by default -->
-      <geom group="3"  contype="0" conaffinity="1" solimp="0.015 1 0.031" friction="0.8 0.02 0.01" rgba="0 0 1 .2"/>
+      <geom group="3" contype="0" conaffinity="1" solimp="0.015 1 0.031" friction="0.8 0.02 0.01" rgba="0 0 1 .2"/>
       <default class="body_collision">
          <geom type="box" size="0.06130 0.07975 0.129700" pos="0 -0.04805 -0.02148"/>       <!-- Bounding box for body including ears -->
       </default>
@@ -109,7 +109,7 @@
 
   <worldbody>
     <!-- Environment -->
-    <geom name="floor" size="0 0 .05" type="plane" material="grid" condim="3" contype="1" conaffinity="1"/>
+    <geom name="floor" type="plane" size="0 0 .05" material="grid" contype="1" conaffinity="1"/>
     <geom class="visual" name="floor_visual" size="0 0 .05" pos="0 0 -0.001" type="plane" material="grid" group="1" />
     <light name="spotlight" mode="targetbodycom" target="base_link" diffuse="0.9 0.9 0.9" specular="0.3 0.3 0.3" pos="0 -4 4" cutoff="100" castshadow="false" />
     <camera name="tracking_cam" mode="targetbody" target="base_link" pos="0.5 -0.5 0.5" />
@@ -117,17 +117,17 @@
     <body name="base_link" pos="0 0 0.13">
       <site name="body_imu_site" pos="0.09 0 0.032" />
       <inertial pos="0.025 0 0.015" quat="0 0.677807 0 0.73524" mass="1.506" diaginertia="0.00854071 0.0085 0.00235929" />
-      <joint name="world_to_body" type="free" />
+      <freejoint/>
       <geom class="collision" size="0.04507 0.06379 0.129715" pos="0.02146 0 0.03345" quat="0.5 -0.5 -0.5 0.5" type="box" />
-      <!-- <geom class="visual" quat="0.5 -0.5 -0.5 0.5" mesh="BodyV4v70.001" material="ABS_(LightMagenta)" /> -->
+      <!-- Body -->
       <frame quat="0.5 -0.5 -0.5 0.5">
         <geom mesh="Body_V4_Strap"    material="Silicone_(QuickSilver)" class="visual"/>
-        <geom mesh="Body_V4_Ears"     material="ABS_(DodgerBlue)" class="visual"/>
-        <geom mesh="Body_V4_Servos"   material="Plastic_Glossy_(Blue)" class="visual"/>
-        <geom mesh="Body_V4_Glass"    material="Glass_(Grey)" class="visual"/>
+        <geom mesh="Body_V4_Ears"     material="ABS_(DodgerBlue)"       class="visual"/>
+        <geom mesh="Body_V4_Servos"   material="Plastic_Glossy_(Blue)"  class="visual"/>
+        <geom mesh="Body_V4_Glass"    material="Glass_(Grey)"           class="visual"/>
         <geom mesh="Body_V4_Display"  material="Plastic_Glossy_(Black)" class="visual"/>
-        <geom mesh="Body_V4"          material="ABS_(LightMagenta)" class="visual"/>
-        <geom mesh="Body_V4_Handle"   material="Silicone_(White)" class="visual"/>
+        <geom mesh="Body_V4"          material="ABS_(LightMagenta)"     class="visual"/>
+        <geom mesh="Body_V4_Handle"   material="Silicone_(White)"       class="visual"/>
       </frame>
 
       <!-- Front right leg -->
