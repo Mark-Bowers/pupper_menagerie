@@ -9,7 +9,7 @@
     <flag eulerdamp="disable"/>
   </option>
 
-  <compiler angle="radian" assetdir="assets" autolimits="true"/>
+  <compiler angle="radian" meshdir="assets" texturedir="assets" autolimits="true"/>
 
   <sensor>
     <gyro name="body_gyro" site="body_imu_site"/>
