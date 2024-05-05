@@ -60,16 +60,16 @@
   </default>
 
   <asset>
-    <texture type="2d"  file="BrushedAluminum.png"/>
+    <!-- <texture type="2d"  file="BrushedAluminum.png"/>
     <texture type="2d"  file="Oak.png"/>
     <texture type="2d"  file="CarbonFiber.png"/>
-    <texture type="2d"  file="Marble.png"/>
+    <texture type="2d"  file="Marble.png"/> -->
     <texture type="2d"  file="Slate.png"/>
     <texture type="2d"  file="Concrete.png"/>
-    <material name="BrushedAluminum"  texture="BrushedAluminum" specular="0.9" shininess="0.9" reflectance="0.3"/>
+    <!-- <material name="BrushedAluminum"  texture="BrushedAluminum" specular="0.9" shininess="0.9" reflectance="0.3"/>
     <material name="CarbonFiber"      texture="CarbonFiber"     specular="0.9" shininess="0.9" reflectance="0.3"/>
     <material name="Oak"              texture="Oak"             specular="0.0" shininess="0.0" reflectance="0.001" texrepeat="10 10"/>
-    <material name="Marble"           texture="Marble"                     rgba=".7 .65 .65 0.9" specular="0.0" shininess="0.0" reflectance="0.001" texrepeat="10 10"/>
+    <material name="Marble"           texture="Marble"                     rgba=".7 .65 .65 0.9" specular="0.0" shininess="0.0" reflectance="0.001" texrepeat="10 10"/> -->
     <material name="Slate"            texture="Slate"           specular="0.0" shininess="0.0" reflectance="0.001" texrepeat="10 10"/>
     <material name="Concrete"         texture="Concrete"        specular="0.0" shininess="0.0" reflectance="0.001" texrepeat="10 10"/>
     <material name="ABS_(LightMagenta)"     specular="0.5" shininess="0.5" rgba="1.000000 0.521569 1.000000 1.0"/>
