@@ -1,24 +1,24 @@
 <mujoco model="pupper_v3">
   <asset>
-    <texture type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="512" height="512" />
-    <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".2 .4 .6" rgb2=".4 .6 .8" />
-    <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance="0" />
+    <texture type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="512" height="512"/>
+    <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".2 .4 .6" rgb2=".4 .6 .8"/>
+    <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance="0"/>
   </asset>
 
   <option iterations="1" ls_iterations="5" cone="pyramidal" impratio="10" timestep="0.004">
     <flag eulerdamp="disable"/>
   </option>
 
-  <compiler angle="radian" meshdir="assets" autolimits="true" />
+  <compiler angle="radian" assetdir="assets" autolimits="true"/>
 
   <sensor>
-    <gyro name="body_gyro" site="body_imu_site" />
-    <accelerometer name="body_acc" site="body_imu_site" />
-    <framequat name="body_quat" objtype="site" objname="body_imu_site" />
-    <framequat objtype="site" objname="body_imu_site" name="orientation" />
-    <framepos objtype="site" objname="body_imu_site" name="global_position" />
-    <framelinvel objtype="site" objname="body_imu_site" name="global_linvel" />
-    <frameangvel objtype="site" objname="body_imu_site" name="global_angvel" />
+    <gyro name="body_gyro" site="body_imu_site"/>
+    <accelerometer name="body_acc" site="body_imu_site"/>
+    <framequat name="body_quat" objtype="site" objname="body_imu_site"/>
+    <framequat objtype="site" objname="body_imu_site" name="orientation"/>
+    <framepos objtype="site" objname="body_imu_site" name="global_position"/>
+    <framelinvel objtype="site" objname="body_imu_site" name="global_linvel"/>
+    <frameangvel objtype="site" objname="body_imu_site" name="global_angvel"/>
   </sensor>
 
   <custom>
@@ -27,15 +27,19 @@
   </custom>
 
   <default>
-    <general forcerange="-3 3" forcelimited="true" biastype="affine" gainprm="5.0 0 0" biasprm="0 -5.0 -0.1" />
-    <joint armature="0.0016" type="hinge" damping="0.01" limited="true" />
+    <general forcerange="-3 3" forcelimited="true" biastype="affine" gainprm="5.0 0 0" biasprm="0 -5.0 -0.1"/>
+    <joint armature="0.0016" type="hinge" damping="0.01" limited="true"/>
+    <default class="floor">
+      <geom  type="plane" group="1"/>
+    </default>
     <default class="foot">       <!-- groups 0-2 are visible by default -->
       <geom group="1" type="sphere" size="0.01995" material="Polyurethane" contype="0" solimp="0.015 1 0.031" friction="0.8 0.02 0.01"/>
       <default class="r_foot"> <geom size="0.0202" pos="0.06231 -0.06216 0.018"/> <site pos="0.06231 -0.06216 0.018"/> </default>
       <default class="l_foot"> <geom size="0.0202" pos="0.06231  0.06216 0.018"/> <site pos="0.06231  0.06216 0.018"/> </default>
     </default>
     <default class="visual">
-      <geom group="2" type="mesh" contype="0" conaffinity="0" material="Aluminum_(Charcoal)"/>
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+      <default class="floor_visual"> <geom group="0" pos="0 0 0.001" type="plane"/> </default>
       <default class="actuator_visual"> <geom group="1"/> </default>
     </default>
     <default class="collision"> <!-- groups 3-5 are not visible by default -->
@@ -56,6 +60,18 @@
   </default>
 
   <asset>
+    <texture type="2d"  file="BrushedAluminum.png"/>
+    <texture type="2d"  file="Oak.png"/>
+    <texture type="2d"  file="CarbonFiber.png"/>
+    <texture type="2d"  file="Marble.png"/>
+    <texture type="2d"  file="Slate.png"/>
+    <texture type="2d"  file="Concrete.png"/>
+    <material name="BrushedAluminum"  texture="BrushedAluminum" specular="0.9" shininess="0.9" reflectance="0.3"/>
+    <material name="CarbonFiber"      texture="CarbonFiber"     specular="0.9" shininess="0.9" reflectance="0.3"/>
+    <material name="Oak"              texture="Oak"             specular="0.0" shininess="0.0" reflectance="0.001" texrepeat="10 10"/>
+    <material name="Marble"           texture="Marble"                     rgba=".7 .65 .65 0.9" specular="0.0" shininess="0.0" reflectance="0.001" texrepeat="10 10"/>
+    <material name="Slate"            texture="Slate"           specular="0.0" shininess="0.0" reflectance="0.001" texrepeat="10 10"/>
+    <material name="Concrete"         texture="Concrete"        specular="0.0" shininess="0.0" reflectance="0.001" texrepeat="10 10"/>
     <material name="ABS_(LightMagenta)"     specular="0.5" shininess="0.5" rgba="1.000000 0.521569 1.000000 1.0"/>
     <material name="ABS_(DodgerBlue)"       specular="0.5" shininess="0.5" rgba="0.000000 0.588235 1.000000 1.0"/>
     <material name="Steel_Satin"            specular="0.2" shininess="0.2" rgba="0.627451 0.627451 0.627451 1.0"/>
@@ -69,7 +85,7 @@
     <material name="Plastic_Glossy_(Blue)"  specular="0.5" shininess="0.5" rgba="0.188235 0.231373 0.588235 1.0"/>
     <material name="Silicone_(QuickSilver)" specular="0.5" shininess="0.5" rgba="0.654902 0.654902 0.654902 1.0"/>
 
-    <mesh name="BodyV4v70.001" file="BodyV4v70.001.stl" />
+    <mesh name="BodyV4v70.001" file="BodyV4v70.001.stl"/>
 
     <mesh file="Body_V4_Strap.obj"    scale=".01 .01 .01"/>
     <mesh file="Body_V4_Ears.obj"     scale=".01 .01 .01"/>
@@ -79,12 +95,12 @@
     <mesh file="Body_V4.obj"          scale=".01 .01 .01"/>
     <mesh file="Body_V4_Handle.obj"   scale=".01 .01 .01"/>
 
-    <mesh name="LegAssemblyForFlangedv26.001" file="LegAssemblyForFlangedv26.001.stl" />
-    <mesh name="LegAssemblyForFlangedv26.002" file="LegAssemblyForFlangedv26.002.stl" />
-    <mesh name="LegAssemblyForFlangedv26.003" file="LegAssemblyForFlangedv26.003.stl" />
-    <mesh name="LegAssemblyForFlangedv26.010" file="LegAssemblyForFlangedv26.001.stl" scale="1 -1 1" />
-    <mesh name="LegAssemblyForFlangedv26.011" file="LegAssemblyForFlangedv26.002.stl" scale="1 1 -1" />
-    <mesh name="LegAssemblyForFlangedv26.012" file="LegAssemblyForFlangedv26.003.stl" scale="1 1 -1" />
+    <mesh name="LegAssemblyForFlangedv26.001" file="LegAssemblyForFlangedv26.001.stl"/>
+    <mesh name="LegAssemblyForFlangedv26.002" file="LegAssemblyForFlangedv26.002.stl"/>
+    <mesh name="LegAssemblyForFlangedv26.003" file="LegAssemblyForFlangedv26.003.stl"/>
+    <mesh name="LegAssemblyForFlangedv26.010" file="LegAssemblyForFlangedv26.001.stl" scale="1 -1 1"/>
+    <mesh name="LegAssemblyForFlangedv26.011" file="LegAssemblyForFlangedv26.002.stl" scale="1 1 -1"/>
+    <mesh name="LegAssemblyForFlangedv26.012" file="LegAssemblyForFlangedv26.003.stl" scale="1 1 -1"/>
 
     <mesh file="Abduction_Bracket_V10.stl"/>      <!-- Abduction Servo Mounting Bracket -->
     <mesh file="AbBracket_Screw_Caps.stl"/>       <!-- M2.5X8 Socket Head Screw Caps Only (No Threads) -->
@@ -108,16 +124,18 @@
 
   <worldbody>
     <!-- Environment -->
-    <geom name="floor" type="plane" size="0 0 .05" material="grid"/>
-    <geom class="visual" name="floor_visual" size="0 0 .05" pos="0 0 -0.001" type="plane" material="grid" group="1" />
-    <light name="spotlight" mode="targetbodycom" target="base_link" diffuse="0.9 0.9 0.9" specular="0.3 0.3 0.3" pos="0 -4 4" cutoff="100" castshadow="false" />
-    <camera name="tracking_cam" mode="targetbody" target="base_link" pos="0.5 -0.5 0.5" />
+    <geom class="floor" size="0 0 .005" material="grid"/>
+    <!-- <geom class="floor_visual" size="0 0 .005" material="grid"/> -->
+    <geom class="floor_visual" size="2 2 .4" pos="2 0 0.001" material="Slate"/>
+    <geom class="floor_visual" size="2 2 .4" pos="-2 0 0.001" material="Concrete"/>
+    <light name="spotlight" mode="targetbodycom" target="base_link" pos="0 -4 4" diffuse="0.9 0.9 0.9" specular="0.3 0.3 0.3" cutoff="100" castshadow="false"/>
+    <camera name="tracking_cam" mode="targetbody" target="base_link" pos="0.5 -0.5 0.5"/>
 
     <body name="base_link" pos="0 0 0.13">
-      <site name="body_imu_site" pos="0.09 0 0.032" />
-      <inertial pos="0.025 0 0.015" quat="0 0.677807 0 0.73524" mass="1.506" diaginertia="0.00854071 0.0085 0.00235929" />
+      <site name="body_imu_site" pos="0.09 0 0.032"/>
+      <inertial pos="0.025 0 0.015" quat="0 0.677807 0 0.73524" mass="1.506" diaginertia="0.00854071 0.0085 0.00235929"/>
       <freejoint/>
-      <geom class="collision" size="0.04507 0.06379 0.129715" pos="0.02146 0 0.03345" quat="0.5 -0.5 -0.5 0.5" type="box" />
+      <geom class="collision" size="0.04507 0.06379 0.129715" pos="0.02146 0 0.03345" quat="0.5 -0.5 -0.5 0.5" type="box"/>
       <!-- Body -->
       <frame quat="0.5 -0.5 -0.5 0.5">
         <geom mesh="Body_V4_Strap"    material="Silicone_(QuickSilver)" class="visual"/>
@@ -131,7 +149,7 @@
 
       <!-- Front right leg -->
       <body name="leg_front_r_1" pos="0.075 -0.0835 0" quat="0.707107 0.707107 0 0">
-        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
+        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05"/>
         <joint class="r_1" name="leg_front_r_1"/>
         <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
         <frame pos="0 0 -0.028" quat="0 0 0 1">
@@ -145,15 +163,15 @@
           </frame>
         </frame>
         <body name="leg_front_r_2" pos="0 0 0" quat="0.707107 0 -0.707107 0">
-          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
+          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05"/>
           <joint class="r_2" name="leg_front_r_2"/>
            <!-- Position disc, invert the r_2 parent body rotation to re-align with GIM4305, then rotated 1/6 pi to align screw holes -->
           <frame pos="0 0 0.01675" quat="0.683012 0.183013 0.683013 -0.183013">
             <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
           </frame>
-          <geom class="collision" size="0.025" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0" type="sphere" />
+          <geom class="collision" size="0.025" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0" type="sphere"/>
           <!-- Fusion model Upper Leg For Flanged -->
-          <!-- <geom class="visual" pos="-0.028 0 0" quat="0 0.707107 0 0.707107" mesh="LegAssemblyForFlangedv26.002" /> -->
+          <!-- <geom class="visual" pos="-0.028 0 0" quat="0 0.707107 0 0.707107" mesh="LegAssemblyForFlangedv26.002"/> -->
           <frame quat="0.707107 0 -0.707107 0" pos="0 -0.04894 0">
             <geom class="visual" mesh="Upper_R_Leg_0" material="ABS_(DodgerBlue)"/>
             <geom class="visual" mesh="Upper_R_Leg_1" material="Steel_Satin"/>
@@ -165,9 +183,9 @@
             </frame>
           </frame>
           <body name="leg_front_r_3" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0">
-            <inertial pos="0.03866 -0.03585 0.01833" quat="0.270598 0.653281 -0.270598 0.653281" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06" />
-            <joint name="leg_front_r_3" pos="0 0 0" axis="0 0 1" range="-2.79 0.71" />
-            <geom class="visual" pos="0.0685 0.0494 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.003" material="ABS_(DodgerBlue)" />
+            <inertial pos="0.03866 -0.03585 0.01833" quat="0.270598 0.653281 -0.270598 0.653281" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06"/>
+            <joint name="leg_front_r_3" pos="0 0 0" axis="0 0 1" range="-2.79 0.71"/>
+            <geom class="visual" pos="0.0685 0.0494 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.003" material="ABS_(DodgerBlue)"/>
             <geom class="r_foot"/>
             <site class="r_foot" name="leg_front_r_3_foot_site"/>
           </body>
@@ -176,7 +194,7 @@
 
       <!-- Front left leg -->
       <body name="leg_front_l_1" pos="0.075 0.0835 0" quat="0.707107 -0.707107 0 0">
-        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
+        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05"/>
         <joint class="l_1" name="leg_front_l_1"/>
         <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
         <frame pos="0 0 -0.028" quat="0 0 0 1">
@@ -190,15 +208,15 @@
           <!-- <geom class="actuator_collision"/> -->
         </frame>
         <body name="leg_front_l_2" pos="0 0 0" quat="0 0.707107 0 -0.707107">
-          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
+          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05"/>
           <joint class="l_2" name="leg_front_l_2"/>
            <!-- Position disc, invert the r_2 parent body rotation to re-align with GIM4305, then rotated -1/6 pi to align screw holes -->
           <frame pos="0 0 0.01675" quat="0.683013 -0.183013 0.683013 0.183013">
             <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
           </frame>
-          <geom class="collision" size="0.025" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0" type="sphere" />
+          <geom class="collision" size="0.025" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0" type="sphere"/>
           <!-- Fusion model Upper Leg For Flanged -->
-          <!-- <geom class="visual" pos="0.028 0 0" quat="0 0.707107 0 0.707107" mesh="LegAssemblyForFlangedv26.011" /> -->
+          <!-- <geom class="visual" pos="0.028 0 0" quat="0 0.707107 0 0.707107" mesh="LegAssemblyForFlangedv26.011"/> -->
           <frame pos="0 -0.04894 0" quat="0.707107 0 -0.707107 0">
             <geom class="visual" mesh="Upper_L_Leg_0" material="ABS_(DodgerBlue)"/>
             <geom class="visual" mesh="Upper_L_Leg_1" material="Steel_Satin"/>
@@ -210,9 +228,9 @@
             <!-- <geom class="actuator_collision"/> -->
           </frame>
           <body name="leg_front_l_3" pos="0 -0.0494 0.0685" quat="0 -0.707107 0 0.707107">
-            <inertial pos="0.03866 0.03585 0.01833" quat="0.653281 0.270598 -0.653281 0.270598" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06" />
-            <joint name="leg_front_l_3" pos="0 0 0" axis="0 0 1" range="-0.71 2.79" />
-            <geom class="visual" pos="0.0685 -0.0494 -0.028" quat="0 0 1 0" mesh="LegAssemblyForFlangedv26.012" material="ABS_(DodgerBlue)" />
+            <inertial pos="0.03866 0.03585 0.01833" quat="0.653281 0.270598 -0.653281 0.270598" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06"/>
+            <joint name="leg_front_l_3" pos="0 0 0" axis="0 0 1" range="-0.71 2.79"/>
+            <geom class="visual" pos="0.0685 -0.0494 -0.028" quat="0 0 1 0" mesh="LegAssemblyForFlangedv26.012" material="ABS_(DodgerBlue)"/>
             <geom class="l_foot"/>
             <site class="l_foot" name="leg_front_l_3_foot_site"/>
           </body>
@@ -221,7 +239,7 @@
 
       <!-- Back right leg -->
       <body name="leg_back_r_1" pos="-0.075 -0.0725 0" quat="0.707107 0.707107 0 0">
-        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
+        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05"/>
         <joint class="r_1" name="leg_back_r_1"/>
         <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
         <frame pos="0 0 -0.028" quat="0 0 0 1">
@@ -235,15 +253,15 @@
           </frame>
         </frame>
         <body name="leg_back_r_2" pos="0 0 0" quat="0.707107 0 -0.707107 0">
-          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
+          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05"/>
           <joint class="r_2" name="leg_back_r_2"/>
            <!-- Position disc, invert the r_2 parent body rotation to re-align with GIM4305, then rotated 1/6 pi to align screw holes -->
           <frame pos="0 0 0.01675" quat="0.683012 0.183013 0.683013 -0.183013">
             <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
           </frame>
-          <geom class="collision" size="0.025" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0" type="sphere" />
+          <geom class="collision" size="0.025" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0" type="sphere"/>
           <!-- Fusion model Upper Leg For Flanged -->
-          <!-- <geom class="visual" pos="-0.028 0 0" quat="0 0.707107 0 0.707107" mesh="LegAssemblyForFlangedv26.002" /> -->
+          <!-- <geom class="visual" pos="-0.028 0 0" quat="0 0.707107 0 0.707107" mesh="LegAssemblyForFlangedv26.002"/> -->
           <frame quat="0.707107 0 -0.707107 0" pos="0 -0.04894 0">
             <geom class="visual" mesh="Upper_R_Leg_0" material="ABS_(DodgerBlue)"/>
             <geom class="visual" mesh="Upper_R_Leg_1" material="Steel_Satin"/>
@@ -255,9 +273,9 @@
             </frame>
           </frame>
           <body name="leg_back_r_3" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0">
-            <inertial pos="0.03866 -0.03585 0.01833" quat="0.270598 0.653281 -0.270598 0.653281" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06" />
-            <joint name="leg_back_r_3" pos="0 0 0" axis="0 0 1" range="-2.79 0.71" />
-            <geom class="visual" pos="0.0685 0.0494 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.003" material="ABS_(DodgerBlue)" />
+            <inertial pos="0.03866 -0.03585 0.01833" quat="0.270598 0.653281 -0.270598 0.653281" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06"/>
+            <joint name="leg_back_r_3" pos="0 0 0" axis="0 0 1" range="-2.79 0.71"/>
+            <geom class="visual" pos="0.0685 0.0494 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.003" material="ABS_(DodgerBlue)"/>
             <geom class="r_foot"/>
             <site class="r_foot" name="leg_back_r_3_foot_site"/>
           </body>
@@ -266,11 +284,11 @@
 
       <!-- Back left leg -->
       <body name="leg_back_l_1" pos="-0.075 0.0725 0" quat="0.707107 -0.707107 0 0">
-        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05" />
-        <!-- <joint name="leg_back_l_1" pos="0 0 0" axis="0 0 1" range="-2.51 1.22" /> -->
+        <inertial pos="0 0 0" mass="0.18" diaginertia="7.4e-05 5.8e-05 4.8e-05"/>
+        <!-- <joint name="leg_back_l_1" pos="0 0 0" axis="0 0 1" range="-2.51 1.22"/> -->
         <joint class="l_1" name="leg_back_l_1"/>
         <!-- Fusion model Abduction Bracket V10 (Steadywin)-->
-        <!-- <geom class="visual" pos="0 0 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.010" /> -->
+        <!-- <geom class="visual" pos="0 0 -0.028" quat="0 0 0 1" mesh="LegAssemblyForFlangedv26.010"/> -->
         <frame pos="0 0 -0.028" quat="0 0 0 1">
           <geom class="visual" mesh="Abduction_Bracket_V10_L"   material="ABS_(DodgerBlue)"/>
           <geom class="visual" mesh="AbBracket_Screw_Caps_L"    material="Steel_Satin"/>
@@ -282,15 +300,15 @@
           <!-- <geom class="actuator_collision"/> -->
         </frame>
         <body name="leg_back_l_2" pos="0 0 0" quat="0 0.707107 0 -0.707107">
-          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05" />
+          <inertial pos="0 -0.0334 0.05419" quat="0.903877 0.427791 0 0" mass="0.186" diaginertia="0.000113 9.74951e-05 4.65049e-05"/>
           <joint class="l_2" name="leg_back_l_2"/>
           <!-- Position disc, invert the r_2 parent body rotation to re-align with GIM4305, then rotated -1/6 pi to align screw holes -->
           <frame pos="0 0 0.01675" quat="0.683013 -0.183013 0.683013 0.183013">
             <geom class="actuator_visual" mesh="GIM4305_Mounting_Disc" material="Aluminum_Satin"/>
           </frame>
-          <geom class="collision" size="0.025" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0" type="sphere" />
+          <geom class="collision" size="0.025" pos="0 -0.0494 0.0685" quat="0.707107 0 0.707107 0" type="sphere"/>
           <!-- Fusion model Upper Leg For Flanged -->
-          <!-- <geom class="visual" pos="0.028 0 0" quat="0 0.707107 0 0.707107" mesh="LegAssemblyForFlangedv26.011" /> -->
+          <!-- <geom class="visual" pos="0.028 0 0" quat="0 0.707107 0 0.707107" mesh="LegAssemblyForFlangedv26.011"/> -->
           <frame pos="0 -0.04894 0" quat="0.707107 0 -0.707107 0">
             <geom class="visual" mesh="Upper_L_Leg_0" material="ABS_(DodgerBlue)"/>
             <geom class="visual" mesh="Upper_L_Leg_1" material="Steel_Satin"/>
@@ -302,9 +320,9 @@
             <geom class="actuator_collision"/>
           </frame>
           <body name="leg_back_l_3" pos="0 -0.0494 0.0685" quat="0 -0.707107 0 0.707107">
-            <inertial pos="0.03866 0.03585 0.01833" quat="0.653281 0.270598 -0.653281 0.270598" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06" />
-            <joint name="leg_back_l_3" pos="0 0 0" axis="0 0 1" range="-0.71 2.79" />
-            <geom class="visual" pos="0.0685 -0.0494 -0.028" quat="0 0 1 0" mesh="LegAssemblyForFlangedv26.012" material="ABS_(DodgerBlue)" />
+            <inertial pos="0.03866 0.03585 0.01833" quat="0.653281 0.270598 -0.653281 0.270598" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06"/>
+            <joint name="leg_back_l_3" pos="0 0 0" axis="0 0 1" range="-0.71 2.79"/>
+            <geom class="visual" pos="0.0685 -0.0494 -0.028" quat="0 0 1 0" mesh="LegAssemblyForFlangedv26.012" material="ABS_(DodgerBlue)"/>
             <geom class="l_foot"/>
             <site class="l_foot" name="leg_back_l_3_foot_site"/>
           </body>
@@ -314,27 +332,27 @@
   </worldbody>
 
   <actuator>
-    <general joint="leg_front_r_1" name="leg_front_r_1" />
-    <general joint="leg_front_r_2" name="leg_front_r_2" />
-    <general joint="leg_front_r_3" name="leg_front_r_3" />
+    <general joint="leg_front_r_1" name="leg_front_r_1"/>
+    <general joint="leg_front_r_2" name="leg_front_r_2"/>
+    <general joint="leg_front_r_3" name="leg_front_r_3"/>
 
-    <general joint="leg_front_l_1" name="leg_front_l_1" />
-    <general joint="leg_front_l_2" name="leg_front_l_2" />
-    <general joint="leg_front_l_3" name="leg_front_l_3" />
+    <general joint="leg_front_l_1" name="leg_front_l_1"/>
+    <general joint="leg_front_l_2" name="leg_front_l_2"/>
+    <general joint="leg_front_l_3" name="leg_front_l_3"/>
 
-    <general joint="leg_back_r_1" name="leg_back_r_1" />
-    <general joint="leg_back_r_2" name="leg_back_r_2" />
-    <general joint="leg_back_r_3" name="leg_back_r_3" />
+    <general joint="leg_back_r_1" name="leg_back_r_1"/>
+    <general joint="leg_back_r_2" name="leg_back_r_2"/>
+    <general joint="leg_back_r_3" name="leg_back_r_3"/>
 
-    <general joint="leg_back_l_1" name="leg_back_l_1" />
-    <general joint="leg_back_l_2" name="leg_back_l_2" />
-    <general joint="leg_back_l_3" name="leg_back_l_3" />
+    <general joint="leg_back_l_1" name="leg_back_l_1"/>
+    <general joint="leg_back_l_2" name="leg_back_l_2"/>
+    <general joint="leg_back_l_3" name="leg_back_l_3"/>
   </actuator>
 
   <keyframe>
     <key name="home"
       qpos="0 0 0.13             1 0 0 0             0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0"
-      ctrl="0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0" />
+      ctrl="0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0"/>
   </keyframe>
 
 </mujoco>
