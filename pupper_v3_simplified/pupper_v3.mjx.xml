@@ -317,7 +317,7 @@
           <frame pos="-0.013 -0.04894 0.0685" quat="0.707107 -0.707107 0 0">
             <geom class="actuator" mesh="GIM4305_Tab_Connector" material="Nylon_6-6_(White)"/>
             <geom class="actuator" mesh="GIM4305_Servo_Motor"   material="Aluminum_(Charcoal)"/>
-            <geom class="actuator_collision"/>
+            <!-- <geom class="actuator_collision"/> -->
           </frame>
           <body name="leg_back_l_3" pos="0 -0.0494 0.0685" quat="0 -0.707107 0 0.707107">
             <inertial pos="0.03866 0.03585 0.01833" quat="0.653281 0.270598 -0.653281 0.270598" mass="0.05" diaginertia="7.7e-05 7.55e-05 5.5e-06"/>
